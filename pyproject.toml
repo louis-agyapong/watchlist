@@ -1,0 +1,24 @@
+[tool.poetry]
+name = "watchlist-app"
+version = "0.1.0"
+description = "A simple movie watchlist api built with Django"
+authors = ["Louis Agyapong <47106199+louis-agyapong@users.noreply.github.com>"]
+readme = "README.md"
+packages = [{include = "watchlist_app"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+djangorestframework = "^3.14.0"
+django = "^4.1.3"
+black = "^22.10.0"
+mypy = "^0.982"
+django-stubs = "^1.13.0"
+django-extensions = "^3.2.1"
+ipython = "^8.6.0"
+python-decouple = "^3.6"
+dj-database-url = "^1.0.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
