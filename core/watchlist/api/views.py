@@ -4,7 +4,7 @@ from django.shortcuts import get_list_or_404, get_object_or_404
 from rest_framework.decorators import api_view, APIView
 from rest_framework.response import Response
 
-from core.watchlist.api.serializers import MovieSeriazer
+from core.watchlist.api.serializers import MovieSeriazer, MovieModelSerializer
 from core.watchlist.models import Movie
 
 
@@ -55,11 +55,11 @@ def movie_detail(request, pk):
 class MovieListAPIView(APIView):
     def get(self, request):
         movies = get_list_or_404(Movie)
-        serializer = MovieSeriazer(movies, many=True)
+        serializer = MovieModelSerializer(movies, many=True)
         return Response(data=serializer.data)
 
     def post(self, request):
-        serializer = MovieSeriazer(data=request.data)
+        serializer = MovieModelSerializer(data=request.data)
 
         if serializer.is_valid():
             serializer.save()
@@ -70,12 +70,12 @@ class MovieListAPIView(APIView):
 class MovieDetailAPIView(APIView):
     def get(self, request, pk):
         movie = get_object_or_404(Movie, pk=pk)
-        serializer = MovieSeriazer(movie)
+        serializer = MovieModelSerializer(movie)
         return Response(serializer.data)
 
     def put(self, request, pk):
         movie = get_object_or_404(Movie)
-        serializer = MovieSeriazer(movie, data=request.data)
+        serializer = MovieModelSerializer(movie, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data)
