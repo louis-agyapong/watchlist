@@ -38,7 +38,7 @@ class MovieSeriazer(serializers.Serializer):
         Object Level Validation
         Title and description should not be the same
         """
-        if data["name"] == data["description"]:
+        if data["name"].capitalizer() == data["description"].capitalize():
             raise serializers.ValidationError("Title and description should be different.")
         return data
 
@@ -62,6 +62,6 @@ class MovieModelSerializer(serializers.ModelSerializer):
         Object Level Validation
         Title and description should not be the same
         """
-        if data["name"] == data["description"]:
+        if data["name"].capitalize() == data["description"].capitalize():
             raise serializers.ValidationError("Title and description should be different.")
         return data
