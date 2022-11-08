@@ -6,6 +6,7 @@ def name_length(value):
     if len(value) < 2:
         raise serializers.ValidationError(f"{value} is too short")
 
+
 class MovieSeriazer(serializers.Serializer):
     id = serializers.IntegerField(read_only=True)
     name = serializers.CharField()
@@ -37,6 +38,30 @@ class MovieSeriazer(serializers.Serializer):
         Object Level Validation
         Title and description should not be the same
         """
-        if data['name'] == data['description']:
+        if data["name"] == data["description"]:
+            raise serializers.ValidationError("Title and description should be different.")
+        return data
+
+
+class MovieModelSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Movie
+        fields = ["id", "name", "description", "active"]
+
+    def validate_name(self, value):
+        """
+        Field Level Validation
+        Check if movie name is less than 2.
+        """
+        if len(value) < 2:
+            raise serializers.ValidationError("Name is too short")
+        return value
+
+    def validate(self, data):
+        """
+        Object Level Validation
+        Title and description should not be the same
+        """
+        if data["name"] == data["description"]:
             raise serializers.ValidationError("Title and description should be different.")
         return data
