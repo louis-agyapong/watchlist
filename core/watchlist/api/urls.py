@@ -1,9 +1,9 @@
 from django.urls import path
 
-from .views import movie_detail, movie_list
+from .views import movie_detail, movie_list, MovieDetailAPIView, MovieListAPIView
 
 urlpatterns = [
-    path("list/", movie_list, name="movie_list"),
-    path("<int:pk>/", movie_detail, name="movie_detail"),
+    path("list/", MovieListAPIView.as_view(), name="movie_list"),
+    path("<int:pk>/", MovieDetailAPIView.as_view(), name="movie_detail"),
 ]
  
