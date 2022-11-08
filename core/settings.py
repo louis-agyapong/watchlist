@@ -48,7 +48,7 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "core.urls"
 
-CONTEXT_PROCESSORS: list = [
+CONTEXT_PROCESSORS: list[str] = [
     "django.template.context_processors.debug",
     "django.template.context_processors.request",
     "django.contrib.auth.context_processors.auth",
