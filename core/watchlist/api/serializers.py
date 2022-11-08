@@ -44,9 +44,11 @@ class MovieSeriazer(serializers.Serializer):
 
 
 class MovieModelSerializer(serializers.ModelSerializer):
+    len_name = serializers.SerializerMethodField()
+
     class Meta:
         model = Movie
-        fields = ["id", "name", "description", "active"]
+        fields = ["id", "name", "description", "active", "len_name"]
 
     def validate_name(self, value):
         """
@@ -65,3 +67,6 @@ class MovieModelSerializer(serializers.ModelSerializer):
         if data["name"].capitalize() == data["description"].capitalize():
             raise serializers.ValidationError("Title and description should be different.")
         return data
+
+    def get_len_name(self, obj):
+        return len(obj.name)
