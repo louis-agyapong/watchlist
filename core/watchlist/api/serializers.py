@@ -74,7 +74,7 @@ class MovieModelSerializer(serializers.ModelSerializer):
         """
         Serializer method field
         """
-        return len(obj.name)
+        return len(obj.title)
 
 
 class StreamingPlatformMS(serializers.ModelSerializer):

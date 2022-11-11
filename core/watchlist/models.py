@@ -1,18 +1,18 @@
 from django.db import models
-from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from core.common.models import BaseModel, SoftDeleteModel
 
 
 class StreamingPlatform(models.Model):
     name = models.CharField(_("Name"), max_length=100)
     about = models.TextField(_("About"), blank=True)
-    website = models.URLField(_("Website"), max_length=100)
+    website = models.URLField(_("Website"), max_length=100, blank=True)
 
     def __str__(self) -> str:
         return self.name
 
 
-class Movie(models.Model):
+class Movie(SoftDeleteModel):
     title = models.CharField(_("Title"), max_length=100)
     platform = models.ForeignKey(
         StreamingPlatform,
