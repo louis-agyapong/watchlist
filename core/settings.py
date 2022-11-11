@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Local apps
     "core.watchlist",
+    "core.common",
     # External apps
     "rest_framework",
     "django_extensions",
