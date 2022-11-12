@@ -12,7 +12,8 @@ class MovieSeriazer(serializers.Serializer):
     title = serializers.CharField()
     plot = serializers.CharField(validators=[title_length])
     active = serializers.BooleanField()
-    created = serializers.DateTimeField()
+    created_at = serializers.DateTimeField()
+    updated_at = serializers.DateTimeField()
 
     def create(self, validated_data):
         return Movie.objects.create(**validated_data)
@@ -22,7 +23,8 @@ class MovieSeriazer(serializers.Serializer):
         instance.title = validated_data.get("title", instance.title)
         instance.plot = validated_data.get("plot", instance.plot)
         instance.active = validated_data.get("active", instance.active)
-        instance.created = validated_data.get("created", instance.created)
+        instance.created_at = validated_data.get("created", instance.created_at)
+        instance.updated = validated_data.get("created", instance.created_at)
         instance.save()
         return instance
 
@@ -50,7 +52,7 @@ class MovieModelSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Movie
-        fields = ["id", "title", "plot", "active", "created", "len_title"]
+        fields = ["id", "title", "plot", "active", "len_title", "created_at", "updated_at"]
 
     def validate_title(self, value):
         """

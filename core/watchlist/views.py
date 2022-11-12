@@ -4,7 +4,7 @@ from django.http import JsonResponse, Http404
 
 
 def movie_list(request) -> JsonResponse:
-    movies = Movie.objects.values("name", "active")
+    movies = Movie.objects.values("title", "active")
     data = {"results": list(movies)}
     return JsonResponse(data)
 
@@ -16,7 +16,8 @@ def movie_detail(request, pk) -> JsonResponse:
         raise Http404("Movie does not exist")
     data = {
         "results": {
-            "name": movie.name,
+            "title": movie.title,
+            "plot": movie.plot,
             "active": movie.active,
         }
     }
