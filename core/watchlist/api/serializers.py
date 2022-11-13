@@ -52,7 +52,7 @@ class MovieModelSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Movie
-        fields = ["id", "title", "plot", "active", "len_title", "created_at", "updated_at"]
+        fields = ["id", "title", "plot", "active", "platform", "len_title", "created_at", "updated_at"]
 
     def validate_title(self, value):
         """
@@ -80,6 +80,7 @@ class MovieModelSerializer(serializers.ModelSerializer):
 
 
 class StreamingPlatformMS(serializers.ModelSerializer):
+    movies = MovieModelSerializer(many=True, read_only=True)
     class Meta:
         model = StreamingPlatform
-        fields = ["name", "about", "website"]
+        fields = ["name", "about", "website", "movies"]
