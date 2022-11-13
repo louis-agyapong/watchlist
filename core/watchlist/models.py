@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from core.common.models import BaseModel, SoftDeleteModel
 
 
-class StreamingPlatform(BaseModel, SoftDeleteModel):
+class StreamingPlatform(BaseModel):
     name = models.CharField(_("Name"), max_length=100)
     about = models.TextField(_("About"), blank=True)
     website = models.URLField(_("Website"), max_length=100, blank=True)
@@ -12,7 +12,7 @@ class StreamingPlatform(BaseModel, SoftDeleteModel):
         return self.name
 
 
-class Movie(BaseModel, SoftDeleteModel):
+class Movie(BaseModel):
     title = models.CharField(_("Title"), max_length=100)
     platform = models.ForeignKey(
         StreamingPlatform,
